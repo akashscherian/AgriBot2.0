@@ -1,0 +1,44 @@
+🚀 Core Features
+Dual-Port Flask Server:
+
+Port 8080: Real-time robot control dashboard with live video streaming (OpenCV), GPIO motor control, soil moisture monitoring, and irrigation.
+
+Port 8088: Leaf disease detection system using a pre-trained CNN (model.h5) for classifying Healthy, Powdery, and Rust conditions.
+
+Hardware Integration:
+
+Motor control via L298N driver (GPIO pins 29/31/33/35).
+
+Soil moisture sensor (GPIO 12) and relay-triggered water pump (GPIO 7).
+
+Machine Learning Pipeline:
+
+CNN model trained with ImageDataGenerator (87% validation accuracy).
+
+Image preprocessing, augmentation (zoom/flip/shear), and model saving to model.h5.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+📂 Project Structure
+
+AgriBox-2.0/
+├── app.py                 # Main Flask server (dual ports)
+├── Model_training.py      # CNN training with data augmentation
+├── models.h5              # Pretrained Keras model
+├── Dataset/               # Leaf disease dataset (Train/Test/Validation)
+├── static/                # CSS/JS assets
+├── templates/             # HTML interfaces
+└── Test/                  # Captured images for predictions
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+🛠️ Setup & Usage
+
+Install Dependencies:
+pip install flask tensorflow opencv-python RPi.GPIO
+Run Servers:
+python app.py  # Starts ports 8080 (robot) & 8088 (disease detector)
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Access Interfaces:
+Robot Control: http://<RPi_IP>:8080
+Disease Detection: http://<RPi_IP>:8088
