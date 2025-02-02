@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaf Disease</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>Leaf Disease Detection System</h1>
+
+    <!-- First Row: Live Streaming from Camera -->
+    <div class="video-container">
+        <img id="video-stream" src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+
+    <!-- Second Row: Capture Button -->
+    <div class="button-container">
+        <button id="capture">Capture</button>
+    </div>
+
+    <!-- Third Row: Display Captured Image -->
+    <div class="image-container">
+        <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+
+    <!-- Fourth Row: Predict Button -->
+    <div class="predict-container">
+        <button id="predict">Predict</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

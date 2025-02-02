@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Control</title>
+</head>
+
+<div class="container">
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Forward'" >Forward</button>
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Left'" >Left</button>
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Stop'" >Stop</button>
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Right'" >Right</button>
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Backward'" >Backword</button>
+	<button class="button" onclick="getSoilMoisture()">Soilmoisture</button>
+	<input type="text" class="soil-moisture-value" id="soil-moisture-value" placeholder="Soil Moisture" readonly>
+    <button class="button" onclick="location.href='http://{{HTML_address}}:8080/Pump'" >Pump</button>
+</div>
+
+<body>
+<div class="container">
+<div class="row">
+<div class="col-lg-8  offset-lg-2">
+    <h3 class="mt-5">Live Streaming</h3>
+    <img src="{{ url_for('video_feed') }}" width="300%">
+</div>
+</div>
+</div>
+
+
+<script>
+function getSoilMoisture() {
+    fetch('/get_soil_moisture')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('soil-moisture-value').value = data.soil_moisture;
+        })
+        .catch(error => console.error('Error fetching soil moisture:', error));
+}
+</script>
+
+
+<style>
+.container {
+display: grid;
+grid-template-columns: 33.33% 33.33% 33.33%;
+grid-template-rows: 25% 25% 25% 25%;
+width: 500px;
+height: 300px;
+zoom : 2;
+}
+
+. input {
+margin: 20px;
+
+}
+.input:nth-child(1) {
+grid-column-start: 2;
+grid-column-end: 3;
+
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button:nth-child(1) { grid-column: 2 / 3; grid-row: 1 / 2; background: green; color: white; }
+.button:nth-child(2) { grid-column: 1 / 2; grid-row: 2 / 3; background: green; }
+.button:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; background: red; }
+.button:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; background: green; }
+.button:nth-child(5) { grid-column: 2 / 3; grid-row: 3 / 4; background: green; }
+.button:nth-child(6) { grid-column: 1 / 2; grid-row: 4 / 5; background: brown; }
+
+/* Soil moisture text box */
+.soil-moisture-value {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  padding: 15px;
+  font-size: 20px;
+  text-align: center;
+  border: 2px solid #04AA6D;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+}
+
+.button:nth-child(8) { grid-column: 3 / 4; grid-row: 4 / 5; background: blue; }
+
+</style>
+</html>
